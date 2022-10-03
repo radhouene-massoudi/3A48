@@ -1,0 +1,16 @@
+{% set nb=0 %}
+{% for h in tab %}
+
+{% if h.nb_participants>nb %}
+{% set nb=h.nb_participants%}
+{% endif %}
+{% endfor %}
+
+{{nb}}
+
+{% for h in tab %}
+{% if h.nb_participants==nb %}
+
+{{h.Titre | lower|upper }}
+{% endif %}
+{% endfor %}

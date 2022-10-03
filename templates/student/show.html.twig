@@ -1,0 +1,20 @@
+
+<h1>liste des etudiants </h1>
+<table border="2">
+
+<tr>
+<td> id </td>
+<td> name</td>
+<td> surname</td>
+<td>Action</td>
+</tr>
+{% for student in students %}
+<tr>
+<td>
+{{student.id}}</td>
+<td>{{student.name}}</td>
+<td>{{student.surname}}</td>
+<td><a href="{{path('remove',{'id':student.id})}}">remove</a></td
+</tr>
+{% endfor %}
+<table>
