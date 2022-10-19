@@ -1,0 +1,18 @@
+
+<h1>liste des etudiants </h1>
+<table border="2">
+
+<tr>
+<td> id </td>
+<td> name</td>
+<td>Action</td>
+</tr>
+{% for classroom in classrooms %}
+<tr>
+<td>
+    {{classroom.ref}}</td>
+<td>{{classroom.name}}</td>
+<td><a href="{{path('addstydentsss',{'id':classroom.ref})}}">add student</a></td
+</tr>
+{% endfor %}
+<table>
