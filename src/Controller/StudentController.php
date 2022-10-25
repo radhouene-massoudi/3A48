@@ -8,6 +8,7 @@ use App\Form\St2Type;
 use App\Form\StudentType;
 use App\Repository\ClassroomRepository;
 use App\Repository\StudentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,5 +109,19 @@ $em->flush();
 return $this->render('student/addst.html.twig', [
     'f' => $form->createView(),
 ]);
+    }
+
+    #[Route('/select/{klass}', name: 'select')]
+    public function select(EntityManagerInterface $em, StudentRepository $repo,$klass=null)
+    {
+// $req=$em->createQuery("select s.id,c.name from App\Entity\Student s join s.classroom c where c.name=:t");
+// $req->setParameter('t',$klass);
+// $result=$req->getResult();
+// dd($result);
+// $res=$repo->fetchStudent();
+//$res=$repo->fetchStudentbyKlass($klass);
+$res=$repo->selectByKlass($klass);
+dd($res);
+return true;
     }
 }

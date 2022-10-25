@@ -63,4 +63,53 @@ class StudentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function fetchStudent()
+    {
+        $em=$this->getEntityManager();
+      $req=  $em->createQuery('select s.id,c.name from App\Entity\Student s join s.classroom c');
+    return $req->getResult();
+    }
+    public function fetchStudentbyKlass($klasss)
+    {
+        $em=$this->getEntityManager();
+      $req=  $em->createQuery('select s.id,c.name from App\Entity\Student s join s.classroom c where c.name=:k');
+    $req->setParameter('k',$klasss);
+      return $req->getResult();
+    }  
+    public function selectAll()
+       {
+        $student=false;
+         $req=$this
+         ->createQueryBuilder('s');
+         if($student==false){
+            $req->select('s.name t')
+            ->join('s.classroom','c')
+            ->addSelect('c.name');
+         }
+         
+         $res=$req->getQuery()
+         ->getResult();
+         dd($res);
+           
+       }
+       public function selectByKlass($klass)
+       {
+        //$student=false;
+        //dd($klass);
+         $req=$this
+         ->createQueryBuilder('s');
+         if($klass!=null){
+            $req->select('s.name t')
+            ->join('s.classroom','c')
+            ->addSelect('c.name')
+            ->where('c.name=:t')
+            ->setParameter('t',$klass);
+         }
+         
+         $res=$req->getQuery()
+         ->getResult();
+         dd($res);
+           
+       }
 }
